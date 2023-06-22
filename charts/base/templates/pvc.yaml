@@ -1,0 +1,19 @@
+{{ range $volume_name, $volume := .Values.volume }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $volume_name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "pewty.labels" $ | nindent 4 }}
+    {{- with $.Values.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with $.Values.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+    {{- toYaml $volume | nindent 6 }}
+{{- end }}
