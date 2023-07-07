@@ -1,0 +1,15 @@
+{{ range $source := .Values.sources }}
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: {{ $source.name }}
+  namespace: cd
+spec:
+  interval: 1m0s
+  url: {{ $source.url }}
+  ref: 
+    {{ $source.ref | toYaml }}
+  secretRef:
+    name: flux-system
+{{- end }}
