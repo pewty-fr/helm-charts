@@ -1,5 +1,13 @@
 apiVersion: v1
 entries:
+  flux-config:
+  - apiVersion: v2
+    created: "2023-07-07T16:32:12.409396462Z"
+    digest: 21116bddfcfe845c8c9362c5e564f9667a94cb61764fb89dcb46071e445662c8
+    name: flux-config
+    urls:
+    - https://github.com/pewty-fr/helm-charts/releases/download/flux-config-0.0.1/flux-config-0.0.1.tgz
+    version: 0.0.1
   pewty-base:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -16,4 +24,4 @@ entries:
     urls:
     - https://github.com/pewty-fr/helm-charts/releases/download/pewty-base-1.0.1/pewty-base-1.0.1.tgz
     version: 1.0.1
-generated: "2023-06-22T20:07:33.917748407Z"
+generated: "2023-07-07T16:32:12.409402263Z"
