@@ -1,6 +1,6 @@
-{{- if eq .Values.controller "deployment" }}
+{{- if eq .Values.controller "statefulset" }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "pewty.fullname" . }}
   namespace: {{ .Release.Namespace }}
@@ -14,17 +14,10 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if and (not .Values.autoscaling.enabled) (.Values.replicas) }}
   replicas: {{ .Values.replicas }}
-  {{- end }}
-  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "pewty.selectorLabels" . | nindent 6 }}
-  {{- with .Values.deploymentStrategy }}
-  strategy:
-    {{- toYaml . | trim | nindent 4 }}
-  {{- end }}
   template:
     metadata:
       labels:
@@ -90,4 +83,23 @@ spec:
           {{- tpl ( $volume | toYaml ) $ | nindent 10}}
       {{- end }}
       {{- end }}
+  {{- with .Values.volume }}
+  volumeClaimTemplates:
+  {{- range $volume_name, $volume := . }}
+  - metadata:
+      name: {{ $volume_name }}
+      namespace: {{ $.Release.Namespace }}
+      labels:
+        {{- include "pewty.labels" $ | nindent 8 }}
+        {{- with $.Values.labels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with $.Values.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      {{- toYaml $volume | nindent 6 }}
+    {{- end }}
+    {{- end }}
 {{- end }}

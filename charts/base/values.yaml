@@ -1,4 +1,4 @@
-name:
+name: 
 instance: 
 
 extraLabels: {}
@@ -6,7 +6,9 @@ annotations: {}
 podAnnotations: {}
 podLabels: {}
 
-replicas: 2
+controller: "deployment"
+
+replicas: 1
 
 ## Number of old ReplicaSets to retain
 revisionHistoryLimit: 10
@@ -21,15 +23,15 @@ image:
   ##
   ## Created with : kubectl create secret docker-registry scaleway-registry --docker-server=rg.fr-par.scw.cloud --docker-username=technique-registry --docker-password=$SCW_SECRET_KEY
   ## Must be present in every needed namespace 
-  pullSecrets: 
-  - name: scaleway-registry
+  pullSecrets: []
+  # - name: scaleway-registry
 
 ## Create HorizontalPodAutoscaler object for Deployment type
 autoscaling:
   enabled: false
   minReplicas: 2
   maxReplicas: 5
-  targetCPU: "60"
+  targetCPU: "70"
   targetMemory: ""
   behavior: {}
 
@@ -45,18 +47,18 @@ deploymentStrategy:
 
 ## ref : https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 # If fail = no more traffic through Kubernetes Services
-readinessProbe:
-  httpGet:
-    path: /api/health
-    port: 3000
+readinessProbe: {}
+  # httpGet:
+  #   path: /api/health
+  #   port: 3000
 # If fail = restart
-livenessProbe:
-  httpGet:
-    path: /api/health
-    port: 3000
-  initialDelaySeconds: 60
-  timeoutSeconds: 30
-  failureThreshold: 10
+livenessProbe: {}
+  # httpGet:
+  #   path: /api/health
+  #   port: 3000
+  # initialDelaySeconds: 60
+  # timeoutSeconds: 30
+  # failureThreshold: 10
 # For legacy/heavy apps that might require an additional startup time on their first initialization
 startupProbe: {}
 

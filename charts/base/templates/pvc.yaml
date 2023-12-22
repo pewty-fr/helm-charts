@@ -1,4 +1,5 @@
-{{ range $volume_name, $volume := .Values.volume }}
+{{- if eq .Values.controller "deployment" }}
+{{- range $volume_name, $volume := .Values.volume }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -16,4 +17,5 @@ metadata:
   {{- end }}
 spec:
     {{- toYaml $volume | nindent 6 }}
+{{- end }}
 {{- end }}
