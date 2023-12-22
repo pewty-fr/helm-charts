@@ -18,6 +18,21 @@ entries:
   pewty-base:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-12-22T12:46:51.78268193Z"
+    description: Base charts for all Pewty apps
+    digest: 67b07c9e12d63a3d3000397e45e706b0d7f50776e562557bfdeb70947867f524
+    home: https://www.pewty.fr/
+    kubeVersion: ^1.26.0-0
+    maintainers:
+    - email: tanguy.falconnet@pewty.fr
+      name: Tanguy Falconnet
+    name: pewty-base
+    type: application
+    urls:
+    - https://github.com/pewty-fr/helm-charts/releases/download/pewty-base-1.0.11/pewty-base-1.0.11.tgz
+    version: 1.0.11
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-12-22T12:42:01.567407176Z"
     description: Base charts for all Pewty apps
     digest: 5cf3293334ab2d345ce956f2a9f263f0b438619a02474d548565989d895560cd
@@ -136,4 +151,4 @@ entries:
     urls:
     - https://github.com/pewty-fr/helm-charts/releases/download/pewty-base-1.0.1/pewty-base-1.0.1.tgz
     version: 1.0.1
-generated: "2023-12-22T12:42:01.567455926Z"
+generated: "2023-12-22T12:46:51.782726553Z"
